@@ -744,20 +744,6 @@ class MainActivity : SimpleActivity() {
         }
     }
 
-    @SuppressLint("MissingPermission")
-    private fun clearMissedCalls() {
-        try {
-            // notification cancellation triggers MissedCallNotifier.clearMissedCalls() which, in turn,
-            // should update the database and reset the cached missed call count in MissedCallNotifier.java
-            // https://android.googlesource.com/platform/packages/services/Telecomm/+/master/src/com/android/server/telecom/ui/MissedCallNotifierImpl.java#170
-            telecomManager.cancelMissedCallsNotification()
-
-            notificationManager.cancel(420)
-            config.numberMissedCalls = 0
-            updateUnreadCountBadge(0)
-        } catch (ignored: Exception) {
-        }
-    }
 
     private fun launchSettings() {
         closeSearch()
